@@ -1,18 +1,18 @@
 <?php
 
 /*
- * This file is part of blomstra/s3-assets.
+ * This file is part of fof/s3-assets.
  *
- * Copyright (c) 2022 Blomstra Ltd.
+ * Copyright (c) FriendsOfFlarum
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
-namespace Blomstra\S3Assets;
+namespace FoF\S3Assets;
 
-use Blomstra\S3Assets\Extend\Drivers;
 use Flarum\Extend;
+use FoF\S3Assets\Extend\Drivers;
 
 return [
     (new Extend\Frontend('admin'))

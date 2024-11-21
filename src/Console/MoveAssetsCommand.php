@@ -1,6 +1,15 @@
 <?php
 
-namespace Blomstra\S3Assets\Console;
+/*
+ * This file is part of fof/s3-assets.
+ *
+ * Copyright (c) FriendsOfFlarum
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
+namespace FoF\S3Assets\Console;
 
 use Flarum\Console\AbstractCommand;
 use Flarum\Foundation\Console\AssetsPublishCommand;
@@ -21,7 +30,7 @@ class MoveAssetsCommand extends AbstractCommand
      */
     protected $container;
 
-    /** 
+    /**
      * @var Factory
      */
     protected $factory;
@@ -37,15 +46,14 @@ class MoveAssetsCommand extends AbstractCommand
     protected $url;
 
     /**
-    * @var Paths
-    */
+     * @var Paths
+     */
     protected $paths;
 
     /**
      * @var AssetsPublishCommand
      */
     protected $publishCommand;
-
 
     public function __construct(Container $container, Factory $factory, Paths $paths, AssetsPublishCommand $publishCommand)
     {
@@ -78,13 +86,13 @@ class MoveAssetsCommand extends AbstractCommand
 
         // Move avatars
         $this->info('Moving avatars...');
-        $this->moveFilesToDisk($localFilesystem, $this->paths->public . '/assets/avatars', $this->avatarDisk);
+        $this->moveFilesToDisk($localFilesystem, $this->paths->public.'/assets/avatars', $this->avatarDisk);
 
         // Move profile covers
         if (Arr::has($this->getFlarumDisks(), 'sycho-profile-cover')) {
             $this->info('Moving profile covers...');
             $coversDisk = $this->factory->disk('sycho-profile-cover');
-            $this->moveFilesToDisk($localFilesystem, $this->paths->public . '/assets/covers', $coversDisk);
+            $this->moveFilesToDisk($localFilesystem, $this->paths->public.'/assets/covers', $coversDisk);
         }
 
         $this->publishCommand->run(
@@ -107,7 +115,7 @@ class MoveAssetsCommand extends AbstractCommand
     {
         foreach ($localFilesystem->allFiles($localPath) as $file) {
             /** @var \Symfony\Component\Finder\SplFileInfo $file */
-            $this->info('Moving ' . $file->getPathname());
+            $this->info('Moving '.$file->getPathname());
             $written = $disk->put($file->getRelativePathname(), $file->getContents());
 
             if ($written) {

@@ -1,4 +1,4 @@
-# S3 Assets
+# FoF S3 Assets
 
 A [Flarum](http://flarum.org) extension. Relocate Flarum disks onto S3 or compatible bucket
 
@@ -7,13 +7,13 @@ A [Flarum](http://flarum.org) extension. Relocate Flarum disks onto S3 or compat
 Install with composer:
 
 ```sh
-composer require blomstra/s3-assets:"*"
+composer require fof/s3-assets:"*"
 ```
 
 ## Updating
 
 ```sh
-composer update blomstra/s3-assets
+composer update fof/s3-assets
 php flarum cache:clear
 ```
 
@@ -45,5 +45,4 @@ php flarum s3:move
 
 ## Links
 
-- [Extiverse](https://extiverse.com/extension/blomstra/s3-assets)
 - [Discuss](https://discuss.flarum.org/d/PUT_DISCUSS_SLUG_HERE)
