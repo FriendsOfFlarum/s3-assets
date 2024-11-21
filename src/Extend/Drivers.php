@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of blomstra/s3-assets.
+ * This file is part of fof/s3-assets.
  *
  * Copyright (c) FriendsOfFlarum
  *
