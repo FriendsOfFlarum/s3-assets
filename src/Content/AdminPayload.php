@@ -21,7 +21,7 @@ class AdminPayload
         protected Config $config
     ) {
     }
-    
+
     public function __invoke(Document $document)
     {
         $document->payload['s3SetByEnv'] = Arr::get($this->config->offsetGet('filesystems'), 'disks.s3.set_by_environment');
