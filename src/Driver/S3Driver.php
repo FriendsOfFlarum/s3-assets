@@ -1,12 +1,21 @@
 <?php
 
+/*
+ * This file is part of blomstra/s3-assets.
+ *
+ * Copyright (c) FriendsOfFlarum
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\S3Assets\Driver;
 
-use FoF\S3Assets\Driver\Config as DriverConfig;
 use Flarum\Filesystem\DriverInterface;
 use Flarum\Foundation\Config;
 use Flarum\Foundation\Paths;
 use Flarum\Settings\SettingsRepositoryInterface;
+use FoF\S3Assets\Driver\Config as DriverConfig;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Filesystem\Cloud;
 use Illuminate\Filesystem\FilesystemManager;

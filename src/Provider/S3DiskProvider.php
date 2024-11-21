@@ -1,12 +1,20 @@
 <?php
 
+/*
+ * This file is part of blomstra/s3-assets.
+ *
+ * Copyright (c) FriendsOfFlarum
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\S3Assets\Provider;
 
-use FoF\S3Assets\Driver\Config;
-use FoF\S3Assets\Frontend\Versioner;
-use Flarum\Filesystem\FilesystemManager;
 use Flarum\Foundation\AbstractServiceProvider;
 use Flarum\Frontend\Compiler\VersionerInterface;
+use FoF\S3Assets\Driver\Config;
+use FoF\S3Assets\Frontend\Versioner;
 
 class S3DiskProvider extends AbstractServiceProvider
 {
