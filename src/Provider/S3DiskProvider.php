@@ -1,9 +1,9 @@
 <?php
 
-namespace Blomstra\S3Assets\Provider;
+namespace FoF\S3Assets\Provider;
 
-use Blomstra\S3Assets\Driver\Config;
-use Blomstra\S3Assets\Frontend\Versioner;
+use FoF\S3Assets\Driver\Config;
+use FoF\S3Assets\Frontend\Versioner;
 use Flarum\Filesystem\FilesystemManager;
 use Flarum\Foundation\AbstractServiceProvider;
 use Flarum\Frontend\Compiler\VersionerInterface;

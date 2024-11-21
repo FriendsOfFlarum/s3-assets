@@ -1,9 +1,9 @@
 <?php
 
-namespace Blomstra\S3Assets\Extend;
+namespace FoF\S3Assets\Extend;
 
-use Blomstra\S3Assets\Driver\Config;
-use Blomstra\S3Assets\Driver\S3Driver;
+use FoF\S3Assets\Driver\Config;
+use FoF\S3Assets\Driver\S3Driver;
 use Flarum\Extend\ExtenderInterface;
 use Flarum\Extend\Filesystem;
 use Flarum\Extension\Extension;

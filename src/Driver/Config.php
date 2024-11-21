@@ -1,6 +1,6 @@
 <?php
 
-namespace Blomstra\S3Assets\Driver;
+namespace FoF\S3Assets\Driver;
 
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Validation\Factory;

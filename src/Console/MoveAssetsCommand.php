@@ -1,6 +1,6 @@
 <?php
 
-namespace Blomstra\S3Assets\Console;
+namespace FoF\S3Assets\Console;
 
 use Flarum\Console\AbstractCommand;
 use Flarum\Foundation\Console\AssetsPublishCommand;

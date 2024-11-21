@@ -1,6 +1,6 @@
 <?php
 
-namespace Blomstra\S3Assets\Frontend;
+namespace FoF\S3Assets\Frontend;
 
 use Flarum\Frontend\Compiler\RevisionCompiler;
 use Flarum\Frontend\Compiler\VersionerInterface;

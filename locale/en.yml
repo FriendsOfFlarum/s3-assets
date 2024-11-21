@@ -1,4 +1,4 @@
-blomstra-s3-assets:
+fof-s3-assets:
   admin:
     settings:
       configured_by_environment: Your bucket settings have been pre-configured, nothing to see here.

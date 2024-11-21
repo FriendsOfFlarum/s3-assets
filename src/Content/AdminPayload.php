@@ -1,6 +1,6 @@
 <?php
 
-namespace Blomstra\S3Assets\Content;
+namespace FoF\S3Assets\Content;
 
 use Flarum\Frontend\Document;
 use Illuminate\Support\Arr;

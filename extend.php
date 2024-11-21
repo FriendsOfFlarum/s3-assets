@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Blomstra\S3Assets;
+namespace FoF\S3Assets;
 
-use Blomstra\S3Assets\Extend\Drivers;
+use FoF\S3Assets\Extend\Drivers;
 use Flarum\Extend;
 
 return [

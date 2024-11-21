@@ -1,15 +1,12 @@
 {
-    "name": "blomstra/s3-assets",
+    "name": "fof/s3-assets",
     "description": "Relocate Flarum disks onto S3 or compatible bucket",
     "keywords": [
         "flarum"
     ],
     "type": "flarum-extension",
     "license": "MIT",
-    "homepage": "https://blomstra.net",
-    "support": {
-        "email": "helpdesk@blomstra.net"
-    },
+    "homepage": "https://friendsofflarum.org",
     "require": {
         "php": "^8.0",
         "flarum/core": "^1.3.1",
@@ -18,14 +15,14 @@
     },
     "authors": [
         {
-            "name": "Team Blomstra",
-            "email": "development@blomstra.net",
+            "name": "Ian Morland",
+            "email": "ian@flarum.org",
             "role": "Developer"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Blomstra\\S3Assets\\": "src/"
+            "FoF\\S3Assets\\": "src/"
         }
     },
     "extra": {
@@ -50,7 +47,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Blomstra\\S3Assets\\Tests\\": "tests/"
+            "FoF\\S3Assets\\Tests\\": "tests/"
         }
     },
     "scripts": {

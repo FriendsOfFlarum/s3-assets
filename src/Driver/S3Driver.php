@@ -1,8 +1,8 @@
 <?php
 
-namespace Blomstra\S3Assets\Driver;
+namespace FoF\S3Assets\Driver;
 
-use Blomstra\S3Assets\Driver\Config as DriverConfig;
+use FoF\S3Assets\Driver\Config as DriverConfig;
 use Flarum\Filesystem\DriverInterface;
 use Flarum\Foundation\Config;
 use Flarum\Foundation\Paths;
