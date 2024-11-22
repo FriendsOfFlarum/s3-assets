@@ -12,7 +12,6 @@
 namespace FoF\S3Assets;
 
 use Flarum\Extend;
-use FoF\S3Assets\Extend\Drivers;
 
 return [
     (new Extend\Frontend('admin'))
@@ -31,6 +30,4 @@ return [
     (new Extend\Filesystem())
         ->driver('s3', Driver\S3Driver::class)
         ->driver('local', Driver\S3Driver::class),
-
-    //new Drivers(),
 ];

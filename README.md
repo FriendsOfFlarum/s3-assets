@@ -40,7 +40,7 @@ After your new bucket is configured, any exisiting files, will not exist there (
 Use the provided command to start moving these files:
 
 ```php
-php flarum s3:move
+php flarum fof:s3:move
 ```
 
 ## Links

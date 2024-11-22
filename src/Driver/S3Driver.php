@@ -18,6 +18,7 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use FoF\S3Assets\Driver\Config as DriverConfig;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Filesystem\Cloud;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Support\Arr;
 
@@ -25,8 +26,11 @@ class S3Driver implements DriverInterface
 {
     protected FilesystemManager $manager;
 
-    public function __construct(protected Paths $paths, protected DriverConfig $config, Container $container)
-    {
+    public function __construct(
+        protected Paths $paths,
+        protected DriverConfig $config,
+        Container $container
+    ) {
         $this->manager = new FilesystemManager($container);
     }
 
