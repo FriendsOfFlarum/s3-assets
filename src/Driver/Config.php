@@ -45,6 +45,7 @@ class Config
             $this->validator->assertValid($config);
         } catch (IlluminateValidationException $e) {
             $this->logger->error('[fof-s3-assets] Invalid S3 disk configuration', ['errors' => $e->errors()]);
+
             return [];
         }
 
@@ -80,7 +81,7 @@ class Config
                 'ACL' => $acl,
             ];
         }
- 
+
         return $config;
     }
 
@@ -148,7 +149,7 @@ class Config
     protected function getSettingsPrefix(): string
     {
         $shareWithFoFUpload = (bool) $this->settings->get('fof-s3-assets.share_s3_config_with_fof_upload');
-        
+
         if ($shareWithFoFUpload) {
             return 'fof-upload';
         }
