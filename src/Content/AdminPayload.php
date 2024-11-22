@@ -14,6 +14,7 @@ namespace FoF\S3Assets\Content;
 use Flarum\Foundation\Config;
 use Flarum\Frontend\Document;
 use Flarum\Settings\SettingsRepositoryInterface;
+use FoF\S3Assets\Driver\Config as S3Config;
 use FoF\S3Assets\Repository\S3Repository;
 use Illuminate\Support\Arr;
 
@@ -22,13 +23,14 @@ class AdminPayload
     public function __construct(
         protected Config $config,
         protected SettingsRepositoryInterface $settings,
-        protected S3Repository $s3
+        protected S3Repository $s3,
+        protected S3Config $s3Config
     ) {
     }
 
     public function __invoke(Document $document)
     {
-        $document->payload['s3SetByEnv'] = Arr::get($this->config->offsetGet('filesystems'), 'disks.s3.set_by_environment');
+        $document->payload['s3SetByEnv'] = $this->s3Config->shouldUseEnv();
         $document->payload['FoFS3Regions'] = $this->s3->getAwsRegions();
         $document->payload['FoFS3ShareWithFoFUpload'] = $this->settings->get('fof-s3-assets.share_s3_config_with_fof_upload');
     }

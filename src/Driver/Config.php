@@ -25,9 +25,9 @@ class Config
     ) {
     }
 
-    protected function shouldUseEnv(): bool
+    public function shouldUseEnv(): bool
     {
-        return env('AWS_ACCESS_KEY_ID') && env('AWS_SECRET_ACCESS_KEY') && env('AWS_BUCKET');
+        return env('FOF_S3_AWS_ACCESS_KEY_ID') && env('FOF_S3_AWS_SECRET_ACCESS_KEY') && env('FOF_S3_AWS_BUCKET') && env('FOF_S3_AWS_REGION');
     }
 
     public function config(): array
@@ -44,7 +44,7 @@ class Config
         try {
             $this->validator->assertValid($config);
         } catch (IlluminateValidationException $e) {
-            $this->logger->error('[fof-s3-assets] Invalid S3 disk configuration', ['errors' => $e->errors()]);
+            $this->logger->error('[FOF_S3-assets] Invalid S3 disk configuration', ['errors' => $e->errors()]);
 
             return [];
         }
@@ -87,16 +87,16 @@ class Config
 
     protected function buildConfigFromEnv(): array
     {
-        $bucket = env('AWS_BUCKET');
-        $region = env('AWS_DEFAULT_REGION');
-        $cdnUrl = env('AWS_URL', $this->createAwsUrlFromBucketAndRegion($bucket, $region));
-        $endpoint = env('AWS_ENDPOINT');
-        $pathStyle = (bool) env('AWS_PATH_STYLE_ENDPOINT', false);
-        $acl = env('AWS_ACL');
+        $bucket = env('FOF_S3_AWS_BUCKET');
+        $region = env('FOF_S3_AWS_REGION');
+        $cdnUrl = env('FOF_S3_AWS_URL', $this->createAwsUrlFromBucketAndRegion($bucket, $region));
+        $endpoint = env('FOF_S3_AWS_ENDPOINT');
+        $pathStyle = (bool) env('FOF_S3_AWS_PATH_STYLE_ENDPOINT', false);
+        $acl = env('FOF_S3_AWS_ACL');
 
         return $this->buildConfigArray(
-            key: env('AWS_ACCESS_KEY_ID'),
-            secret: env('AWS_SECRET_ACCESS_KEY'),
+            key: env('FOF_S3_AWS_ACCESS_KEY_ID'),
+            secret: env('FOF_S3_AWS_SECRET_ACCESS_KEY'),
             region: $region,
             bucket: $bucket,
             cdnUrl: $cdnUrl,
@@ -148,12 +148,12 @@ class Config
 
     protected function getSettingsPrefix(): string
     {
-        $shareWithFoFUpload = (bool) $this->settings->get('fof-s3-assets.share_s3_config_with_fof_upload');
+        $shareWithFoFUpload = (bool) $this->settings->get('FOF_S3-assets.share_s3_config_with_fof_upload');
 
         if ($shareWithFoFUpload) {
             return 'fof-upload';
         }
 
-        return 'fof-s3-assets';
+        return 'FOF_S3-assets';
     }
 }

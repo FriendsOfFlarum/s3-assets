@@ -22,14 +22,16 @@ php flarum cache:clear
 The S3 (or compatible) bucket can be configured either by environment variables or via the extension settings. If the environment variables are set, they will override the settings entered in the admin panel, if set.
 
 #### Environment variables
-- `AWS_ACCESS_KEY_ID` - your access key ID
-- `AWS_SECRET_ACCESS_KEY` - your secret
-- `AWS_DEFAULT_REGION` - the region
-- `AWS_BUCKET` - the bucket name
-- `AWS_URL` - the public facing base URL of the bucket
-- `AWS_ENDPOINT` - the ARN
-- `AWS_ACL` - The ACL, if any, that should be applied to the uploaded object (default: private). For possible values, see [AWS Docs](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) 
+- `FOF_S3_AWS_ACCESS_KEY_ID` - your access key ID *
+- `FOF_S3_AWS_SECRET_ACCESS_KEY` - your secret *
+- `FOF_S3_AWS_DEFAULT_REGION` - the region *
+- `FOF_S3_AWS_BUCKET` - the bucket name *
+- `FOF_S3_AWS_URL` - the public facing base URL of the bucket
+- `FOF_S3_AWS_ENDPOINT` - the ARN
+- `FOF_S3_AWS_ACL` - The ACL, if any, that should be applied to the uploaded object. For possible values, see [AWS Docs](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) 
 - `AWS_PATH_STYLE_ENDPOINT` - boolean value
+
+`*` denotes the minimum requirements for using S3 on AWS. S3-compatible services will require more.
 
 If you plan to setup the S3 configuration using the environment variables, please ensure these are set _before_ enabling the extension
 
