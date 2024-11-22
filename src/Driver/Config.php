@@ -148,12 +148,12 @@ class Config
 
     protected function getSettingsPrefix(): string
     {
-        $shareWithFoFUpload = (bool) $this->settings->get('FOF_S3-assets.share_s3_config_with_fof_upload');
+        $shareWithFoFUpload = (bool) $this->settings->get('fof-s3-assets.share_s3_config_with_fof_upload');
 
         if ($shareWithFoFUpload) {
             return 'fof-upload';
         }
 
-        return 'FOF_S3-assets';
+        return 'fof-s3-assets';
     }
 }
