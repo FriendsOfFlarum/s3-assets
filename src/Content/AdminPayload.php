@@ -16,7 +16,6 @@ use Flarum\Frontend\Document;
 use Flarum\Settings\SettingsRepositoryInterface;
 use FoF\S3Assets\Driver\Config as S3Config;
 use FoF\S3Assets\Repository\S3Repository;
-use Illuminate\Support\Arr;
 
 class AdminPayload
 {
