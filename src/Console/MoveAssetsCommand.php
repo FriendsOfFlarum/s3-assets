@@ -34,8 +34,7 @@ class MoveAssetsCommand extends AbstractCommand
         protected Factory $factory,
         protected Paths $paths,
         protected AssetsPublishCommand $publishCommand
-    )
-    {
+    ) {
         $this->avatarDisk = $factory->disk('flarum-avatars');
 
         parent::__construct();

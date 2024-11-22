@@ -21,7 +21,8 @@ class Versioner implements VersionerInterface
 
     public function __construct(
         protected SettingsRepositoryInterface $settings
-    ) {}
+    ) {
+    }
 
     public function putRevision(string $file, ?string $revision): void
     {
