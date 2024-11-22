@@ -40,6 +40,7 @@ class S3Driver implements DriverInterface
         array $localConfig
     ): Cloud {
         if (empty($this->config->config())) {
+            // @phpstan-ignore-next-line
             return $this->manager->createLocalDriver($localConfig);
         }
 

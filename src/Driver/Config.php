@@ -129,7 +129,7 @@ class Config
         );
     }
 
-    protected function getSetting(string $key, ?string $default = null): mixed
+    protected function getSetting(string $key, mixed $default = null): mixed
     {
         $prefix = $this->getSettingsPrefix();
         $value = $this->settings->get("$prefix.$key");
