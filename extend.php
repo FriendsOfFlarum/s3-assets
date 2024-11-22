@@ -21,6 +21,9 @@ return [
 
     new Extend\Locales(__DIR__.'/locale'),
 
+    (new Extend\Settings())
+        ->default('fof-s3-assets.share_s3_config_with_fof_upload', false),
+
     (new Extend\ServiceProvider())
         ->register(Provider\S3DiskProvider::class),
 

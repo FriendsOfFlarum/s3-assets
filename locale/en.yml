@@ -1,6 +1,19 @@
 fof-s3-assets:
   admin:
     settings:
+      general:
+        heading: General Settings
+        help: General settings for the assets.
+        shareWithFoFUpload:
+          label: Use FoF Upload S3 settings.
+          help: Re-use the S3 settings from the FoF Upload extension.
+      aws-s3:
+        heading: AWS S3 Settings
+        help: Settings for AWS S3 and/or S3-compatible buckets. If you are using AWS S3, you only need to configure these settings.
+      aws-s3-compatible:
+        heading: S3-Compatible Settings
+        help: Settings needed for S3-compatible buckets only. Leave these settings blank if you are using AWS S3.
+
       configured_by_environment: Your bucket settings have been pre-configured, nothing to see here.
       aws-section: These settings are required for both AWS S3 and S3-compatible buckets
       s3-compatible-section: These settings are only required for S3-compatible buckets
