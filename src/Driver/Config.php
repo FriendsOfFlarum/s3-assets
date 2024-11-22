@@ -11,7 +11,6 @@
 
 namespace FoF\S3Assets\Driver;
 
-use Flarum\Foundation\ValidationException;
 use Flarum\Settings\SettingsRepositoryInterface;
 use FoF\S3Assets\Validator\S3DiskConfigValidator;
 use Illuminate\Validation\ValidationException as IlluminateValidationException;
@@ -23,7 +22,8 @@ class Config
         protected SettingsRepositoryInterface $settings,
         protected S3DiskConfigValidator $validator,
         protected LoggerInterface $logger,
-    ) {}
+    ) {
+    }
 
     public function config(): array
     {
@@ -58,6 +58,7 @@ class Config
             $this->validator->assertValid($config);
         } catch (IlluminateValidationException $e) {
             $this->logger->error('[fof-s3-assets] Invalid S3 disk configuration', ['errors' => $e->errors()]);
+
             return [];
         }
 

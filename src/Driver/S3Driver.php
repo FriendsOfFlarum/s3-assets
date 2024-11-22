@@ -36,11 +36,10 @@ class S3Driver implements DriverInterface
         Config $config,
         array $localConfig
     ): Cloud {
-
         if (empty($this->config->config())) {
             return $this->manager->createLocalDriver($localConfig);
         }
-        
+
         $root = Arr::get($localConfig, 'root');
         $root = str_replace($this->paths->public, '', $root);
 
