@@ -75,6 +75,7 @@ export default class S3SettingsPage extends ExtensionPage {
     const items = new ItemList<Mithril.Children>();
 
     app.initializers.has('fof-upload') &&
+      !this.s3SetByEnv &&
       items.add(
         'shareWithFoFUpload',
         this.buildSettingComponent({

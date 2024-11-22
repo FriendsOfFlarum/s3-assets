@@ -27,7 +27,7 @@ class Config
 
     public function shouldUseEnv(): bool
     {
-        return env('FOF_S3_AWS_ACCESS_KEY_ID') && env('FOF_S3_AWS_SECRET_ACCESS_KEY') && env('FOF_S3_AWS_BUCKET') && env('FOF_S3_AWS_REGION');
+        return env('FOF_S3_ACCESS_KEY_ID') && env('FOF_S3_SECRET_ACCESS_KEY') && env('FOF_S3_BUCKET') && env('FOF_S3_REGION');
     }
 
     public function config(): array
@@ -44,7 +44,7 @@ class Config
         try {
             $this->validator->assertValid($config);
         } catch (IlluminateValidationException $e) {
-            $this->logger->error('[FOF_S3-assets] Invalid S3 disk configuration', ['errors' => $e->errors()]);
+            $this->logger->error('[fof-s3-assets] Invalid S3 disk configuration', ['errors' => $e->errors()]);
 
             return [];
         }
@@ -87,16 +87,16 @@ class Config
 
     protected function buildConfigFromEnv(): array
     {
-        $bucket = env('FOF_S3_AWS_BUCKET');
-        $region = env('FOF_S3_AWS_REGION');
-        $cdnUrl = env('FOF_S3_AWS_URL', $this->createAwsUrlFromBucketAndRegion($bucket, $region));
-        $endpoint = env('FOF_S3_AWS_ENDPOINT');
-        $pathStyle = (bool) env('FOF_S3_AWS_PATH_STYLE_ENDPOINT', false);
-        $acl = env('FOF_S3_AWS_ACL');
+        $bucket = env('FOF_S3_BUCKET');
+        $region = env('FOF_S3_REGION');
+        $cdnUrl = env('FOF_S3_URL', $this->createAwsUrlFromBucketAndRegion($bucket, $region));
+        $endpoint = env('FOF_S3_ENDPOINT');
+        $pathStyle = (bool) env('FOF_S3_PATH_STYLE_ENDPOINT', false);
+        $acl = env('FOF_S3_ACL');
 
         return $this->buildConfigArray(
-            key: env('FOF_S3_AWS_ACCESS_KEY_ID'),
-            secret: env('FOF_S3_AWS_SECRET_ACCESS_KEY'),
+            key: env('FOF_S3_ACCESS_KEY_ID'),
+            secret: env('FOF_S3_SECRET_ACCESS_KEY'),
             region: $region,
             bucket: $bucket,
             cdnUrl: $cdnUrl,

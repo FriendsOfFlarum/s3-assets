@@ -8,7 +8,7 @@ fof-s3-assets:
           label: Use FoF Upload S3 settings.
           help: Re-use the S3 settings from the FoF Upload extension.
       aws-s3:
-        heading: AWS S3 Settings
+        heading: S3 Settings
         help: Settings for AWS S3 and/or S3-compatible buckets. If you are using AWS S3, you only need to configure these settings.
       aws-s3-compatible:
         heading: S3-Compatible Settings
