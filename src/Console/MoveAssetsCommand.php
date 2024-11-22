@@ -119,7 +119,7 @@ class MoveAssetsCommand extends AbstractCommand
             $written = $disk->put($file->getRelativePathname(), $file->getContents());
 
             if ($written) {
-                $localFilesystem->delete($file);
+                //$localFilesystem->delete($file);
             } else {
                 throw new \Exception('File did not move');
             }

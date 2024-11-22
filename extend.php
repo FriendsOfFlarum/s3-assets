@@ -28,5 +28,9 @@ return [
     (new Extend\Console())
         ->command(Console\MoveAssetsCommand::class),
 
-    new Drivers(),
+    (new Extend\Filesystem())
+        ->driver('s3', Driver\S3Driver::class)
+        ->driver('local', Driver\S3Driver::class),
+
+    //new Drivers(),
 ];

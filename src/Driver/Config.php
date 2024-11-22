@@ -11,32 +11,19 @@
 
 namespace FoF\S3Assets\Driver;
 
+use Flarum\Foundation\ValidationException;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Illuminate\Validation\Factory;
+use FoF\S3Assets\Validator\S3DiskConfigValidator;
+use Illuminate\Validation\ValidationException as IlluminateValidationException;
+use Psr\Log\LoggerInterface;
 
 class Config
 {
-    public function __construct(protected SettingsRepositoryInterface $settings)
-    {
-    }
-
-    public function valid(): bool
-    {
-        $validator = resolve(Factory::class)->make($this->config(), [
-            'driver'                  => 'required|in:s3',
-            'key'                     => 'required|string',
-            'secret'                  => 'required|string',
-            'region'                  => 'required|string',
-            'bucket'                  => 'required|string',
-            'url'                     => 'url',
-            'endpoint'                => 'required|url',
-            'use_path_style_endpoint' => 'required|bool',
-            'options.ACL'             => 'required|string',
-            'set_by_environment'      => 'required|bool',
-        ]);
-
-        return $validator->passes();
-    }
+    public function __construct(
+        protected SettingsRepositoryInterface $settings,
+        protected S3DiskConfigValidator $validator,
+        protected LoggerInterface $logger,
+    ) {}
 
     public function config(): array
     {
@@ -52,7 +39,7 @@ class Config
 
         $setByEnv = (env('AWS_ACCESS_KEY_ID') || env('AWS_SECRET_ACCESS_KEY') || env('AWS_ENDPOINT'));
 
-        return [
+        $config = [
             'driver'                  => 's3',
             'key'                     => env('AWS_ACCESS_KEY_ID', $this->settings->get('fof-upload.awsS3Key')),
             'secret'                  => env('AWS_SECRET_ACCESS_KEY', $this->settings->get('fof-upload.awsS3Secret')),
@@ -66,5 +53,14 @@ class Config
                 'ACL' => env('AWS_ACL', $this->settings->get('fof-upload.awsS3ACL')),
             ],
         ];
+
+        try {
+            $this->validator->assertValid($config);
+        } catch (IlluminateValidationException $e) {
+            $this->logger->error('[fof-s3-assets] Invalid S3 disk configuration', ['errors' => $e->errors()]);
+            return [];
+        }
+
+        return $config;
     }
 }
