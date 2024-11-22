@@ -17,16 +17,11 @@ use Illuminate\Support\Arr;
 
 class Versioner implements VersionerInterface
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
-
     const REVISION_KEY = 's3assets.revision';
 
-    public function __construct(SettingsRepositoryInterface $settings)
-    {
-        $this->settings = $settings;
+    public function __construct(
+        protected SettingsRepositoryInterface $settings
+    ) {
     }
 
     public function putRevision(string $file, ?string $revision): void

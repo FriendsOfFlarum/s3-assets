@@ -14,7 +14,6 @@ namespace FoF\S3Assets\Console;
 use Flarum\Console\AbstractCommand;
 use Flarum\Foundation\Console\AssetsPublishCommand;
 use Flarum\Foundation\Paths;
-use Flarum\Http\UrlGenerator;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Filesystem\Cloud;
 use Illuminate\Contracts\Filesystem\Factory;
@@ -26,42 +25,17 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 class MoveAssetsCommand extends AbstractCommand
 {
     /**
-     * @var Container
-     */
-    protected $container;
-
-    /**
-     * @var Factory
-     */
-    protected $factory;
-
-    /**
      * @var Cloud
      */
     protected $avatarDisk;
 
-    /**
-     * @var UrlGenerator
-     */
-    protected $url;
-
-    /**
-     * @var Paths
-     */
-    protected $paths;
-
-    /**
-     * @var AssetsPublishCommand
-     */
-    protected $publishCommand;
-
-    public function __construct(Container $container, Factory $factory, Paths $paths, AssetsPublishCommand $publishCommand)
-    {
-        $this->container = $container;
-        $this->factory = $factory;
+    public function __construct(
+        protected Container $container,
+        protected Factory $factory,
+        protected Paths $paths,
+        protected AssetsPublishCommand $publishCommand
+    ) {
         $this->avatarDisk = $factory->disk('flarum-avatars');
-        $this->paths = $paths;
-        $this->publishCommand = $publishCommand;
 
         parent::__construct();
     }
@@ -72,7 +46,7 @@ class MoveAssetsCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName('s3:move')
+            ->setName('fof:s3:move')
             ->setDescription('Move avatars, etc from local filesystem to S3 disks, then republish remaning assets');
     }
 
@@ -119,7 +93,7 @@ class MoveAssetsCommand extends AbstractCommand
             $written = $disk->put($file->getRelativePathname(), $file->getContents());
 
             if ($written) {
-                $localFilesystem->delete($file);
+                //$localFilesystem->delete($file);
             } else {
                 throw new \Exception('File did not move');
             }
