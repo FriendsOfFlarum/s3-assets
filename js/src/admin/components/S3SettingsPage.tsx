@@ -87,7 +87,7 @@ export default class S3SettingsPage extends ExtensionPage {
         })
       );
 
-    // If there are no items, add a placeholder to prevent the page from breaking
+    // If there are no items, add a placeholder.
     if (items.toArray().length === 0 && this.s3SetByEnv) {
       items.add('setByEnv', <Placeholder text={app.translator.trans('fof-s3-assets.admin.settings.general.configured_by_environment')} />);
     }
