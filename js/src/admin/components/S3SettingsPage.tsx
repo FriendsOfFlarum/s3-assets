@@ -51,21 +51,21 @@ export default class S3SettingsPage extends ExtensionPage {
 
     !this.s3SetByEnv &&
       items.add(
-        'aws-s3',
+        's3',
         <div className="Section">
-          <h3>{app.translator.trans('fof-s3-assets.admin.settings.aws-s3.heading')}</h3>
-          <p className="helpText">{app.translator.trans('fof-s3-assets.admin.settings.aws-s3.help')}</p>
-          {this.awss3Items().toArray()}
+          <h3>{app.translator.trans('fof-s3-assets.admin.settings.s3.heading')}</h3>
+          <p className="helpText">{app.translator.trans('fof-s3-assets.admin.settings.s3.help')}</p>
+          {this.s3Items().toArray()}
         </div>
       );
 
     !this.s3SetByEnv &&
       items.add(
-        'aws-s3-compatible',
+        's3-compatible',
         <div className="Section">
-          <h3>{app.translator.trans('fof-s3-assets.admin.settings.aws-s3-compatible.heading')}</h3>
-          <p className="helpText">{app.translator.trans('fof-s3-assets.admin.settings.aws-s3-compatible.help')}</p>
-          {this.awss3CompatibleItems().toArray()}
+          <h3>{app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.heading')}</h3>
+          <p className="helpText">{app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.help')}</p>
+          {this.s3CompatibleItems().toArray()}
         </div>
       );
 
@@ -95,7 +95,7 @@ export default class S3SettingsPage extends ExtensionPage {
     return items;
   }
 
-  awss3Items(): ItemList<Mithril.Children> {
+  s3Items(): ItemList<Mithril.Children> {
     const items = new ItemList<Mithril.Children>();
 
     items.add(
@@ -103,8 +103,8 @@ export default class S3SettingsPage extends ExtensionPage {
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Key`,
         type: 'string',
-        label: app.translator.trans('fof-s3-assets.admin.settings.s3key.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.s3key.help'),
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3.keyid.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3.keyid.help'),
       })
     );
 
@@ -112,9 +112,9 @@ export default class S3SettingsPage extends ExtensionPage {
       'awsS3Secret',
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Secret`,
-        type: 'string',
-        label: app.translator.trans('fof-s3-assets.admin.settings.s3secret.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.s3secret.help'),
+        type: 'password',
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3.secret.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3.secret.help'),
       })
     );
 
@@ -123,8 +123,8 @@ export default class S3SettingsPage extends ExtensionPage {
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Region`,
         type: 'string',
-        label: app.translator.trans('fof-s3-assets.admin.settings.s3region.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.s3region.help'),
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3.region.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3.region.help'),
       })
     );
 
@@ -133,8 +133,8 @@ export default class S3SettingsPage extends ExtensionPage {
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Bucket`,
         type: 'string',
-        label: app.translator.trans('fof-s3-assets.admin.settings.s3bucket.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.s3bucket.help'),
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3.bucket.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3.bucket.help'),
       })
     );
 
@@ -143,8 +143,8 @@ export default class S3SettingsPage extends ExtensionPage {
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3ACL`,
         type: 'string',
-        label: app.translator.trans('fof-s3-assets.admin.settings.s3acl.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.s3acl.help'),
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3.acl.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3.acl.help'),
       })
     );
 
@@ -154,15 +154,15 @@ export default class S3SettingsPage extends ExtensionPage {
         setting: `${this.settingPrefix}awsS3CacheControl`,
         type: 'number',
         min: 0,
-        label: app.translator.trans('fof-s3-assets.admin.settings.aws-s3.cache-control.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.aws-s3.cache-control.help'),
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3.cache-control.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3.cache-control.help'),
       })
     );
 
     return items;
   }
 
-  awss3CompatibleItems(): ItemList<Mithril.Children> {
+  s3CompatibleItems(): ItemList<Mithril.Children> {
     const items = new ItemList<Mithril.Children>();
 
     items.add(
@@ -170,8 +170,8 @@ export default class S3SettingsPage extends ExtensionPage {
       this.buildSettingComponent({
         setting: `${this.settingPrefix}cdnUrl`,
         type: 'string',
-        label: app.translator.trans('fof-s3-assets.admin.settings.s3url.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.s3url.help'),
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.url.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.url.help'),
       })
     );
 
@@ -180,8 +180,8 @@ export default class S3SettingsPage extends ExtensionPage {
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Endpoint`,
         type: 'string',
-        label: app.translator.trans('fof-s3-assets.admin.settings.s3endpoint.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.s3endpoint.help'),
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.endpoint.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.endpoint.help'),
       })
     );
 
@@ -190,8 +190,8 @@ export default class S3SettingsPage extends ExtensionPage {
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3UsePathStyleEndpoint`,
         type: 'boolean',
-        label: app.translator.trans('fof-s3-assets.admin.settings.s3path-style-endpoint.label'),
-        help: app.translator.trans('fof-s3-assets.admin.settings.s3path-style-endpoint.help'),
+        label: app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.path-style-endpoint.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.path-style-endpoint.help'),
       })
     );
 

@@ -31,5 +31,6 @@ class AdminPayload
     {
         $document->payload['s3SetByEnv'] = $this->s3Config->shouldUseEnv();
         $document->payload['FoFS3ShareWithFoFUpload'] = $this->settings->get('fof-s3-assets.share_s3_config_with_fof_upload');
+        $document->payload['cdn'] = $this->s3->cdnHost();
     }
 }
