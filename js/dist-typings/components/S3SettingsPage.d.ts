@@ -13,7 +13,7 @@ export default class S3SettingsPage extends ExtensionPage {
     content(): JSX.Element;
     settingsItems(): ItemList<Mithril.Children>;
     generalItems(): ItemList<Mithril.Children>;
-    awss3Items(): ItemList<Mithril.Children>;
-    awss3CompatibleItems(): ItemList<Mithril.Children>;
+    s3Items(): ItemList<Mithril.Children>;
+    s3CompatibleItems(): ItemList<Mithril.Children>;
 }
 export {};
