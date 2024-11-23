@@ -11,12 +11,20 @@
 
 namespace FoF\S3Assets\Repository;
 
+use FoF\S3Assets\Driver\Config as DriverConfig;
+use Illuminate\Support\Arr;
 use Psr\Log\LoggerInterface;
 
 class S3Repository
 {
     public function __construct(
-        protected LoggerInterface $logger
+        protected LoggerInterface $logger,
+        protected DriverConfig $config
     ) {
+    }
+
+    public function cdnHost(): string
+    {
+        return Arr::get($this->config->config(), 'url');
     }
 }
