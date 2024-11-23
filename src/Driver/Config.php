@@ -52,7 +52,7 @@ class Config
         return $config;
     }
 
-    protected function buildConfigArray(string $key, string $secret, string $region, string $bucket, string $cdnUrl, ?string $endpoint, ?bool $pathStyle, ?string $acl, bool $setByEnv = false, string $cache = 'max-age=31536000', string $driver = 's3'): array
+    protected function buildConfigArray(string $key, string $secret, string $region, string $bucket, string $cdnUrl, ?string $endpoint, ?bool $pathStyle, ?string $acl, ?int $cache = null, bool $setByEnv = false, string $driver = 's3'): array
     {
         // These are the required values for AWS S3.
         // Some S3-compatible services may require additional values, so we check if any of these are set below.
@@ -82,7 +82,7 @@ class Config
         }
 
         if ($cache) {
-            $config['options']['CacheControl'] = $cache;
+            $config['options']['CacheControl'] = "max-age=$cache";
         }
 
         return $config;
@@ -96,6 +96,7 @@ class Config
         $endpoint = env('FOF_S3_ENDPOINT');
         $pathStyle = (bool) env('FOF_S3_PATH_STYLE_ENDPOINT', false);
         $acl = env('FOF_S3_ACL');
+        $cache = env('FOF_S3_CACHE_CONTROL');
 
         return $this->buildConfigArray(
             key: env('FOF_S3_ACCESS_KEY_ID'),
@@ -106,6 +107,7 @@ class Config
             endpoint: $endpoint,
             pathStyle: $pathStyle,
             acl: $acl,
+            cache: $cache,
             setByEnv: true
         );
     }
@@ -118,6 +120,7 @@ class Config
         $endpoint = $this->getSetting('awsS3Endpoint');
         $pathStyle = (bool) $this->getSetting('awsS3UsePathStyleEndpoint', false);
         $acl = $this->getSetting('awsS3ACL');
+        $cache = $this->getSetting('awsS3CacheControl');
 
         return $this->buildConfigArray(
             key: $this->getSetting('awsS3Key', ''),
@@ -128,6 +131,7 @@ class Config
             endpoint: $endpoint,
             pathStyle: $pathStyle,
             acl: $acl,
+            cache: $cache,
             setByEnv: false
         );
     }

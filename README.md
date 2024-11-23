@@ -30,6 +30,7 @@ The S3 (or compatible) bucket can be configured either by environment variables 
 - `FOF_S3_ENDPOINT` - the ARN
 - `FOF_S3_ACL` - The ACL, if any, that should be applied to the uploaded object. For possible values, see [AWS Docs](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) 
 - `FOF_S3_PATH_STYLE_ENDPOINT` - boolean value
+- `FOF_S3_CACHE_CONTROL` - Optional. Specify the `max-age` header files should be served with, for example `3153600` (1 year). `0` or not set = no caching.
 
 `*` denotes the minimum requirements for using S3 on AWS. S3-compatible services will require more.
 
@@ -48,59 +49,3 @@ php flarum fof:s3:copy --move
 ## Links
 
 - [Discuss](https://discuss.flarum.org/d/PUT_DISCUSS_SLUG_HERE)
-
-
-[
-    {
-        "AllowedHeaders": [
-            "*"
-        ],
-        "AllowedMethods": [
-            "POST",
-            "GET",
-            "PUT"
-        ],
-        "AllowedOrigins": [
-            "*"
-        ],
-        "ExposeHeaders": [],
-        "MaxAgeSeconds": 0
-    }
-]
-
-
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::nothing-forum-test/*"
-        }
-    ]
-}
-
-
-{
-    "Version": "2012-10-17",
-    "Id": "http referer policy",
-    "Statement": [
-        {
-            "Sid": "Allow get requests originating from www.nothing.community and nothing.community.",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": [
-                "s3:GetObject",
-                "s3:GetObjectVersion"
-            ],
-            "Resource": "arn:aws:s3:::nothing-forum-test/*",
-            "Condition": {
-                "StringLike": {
-                    "aws:Referer": "https://fstlnforum.bbxlk.cc*"
-                }
-            }
-        }
-    ]
-
-}

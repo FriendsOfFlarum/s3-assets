@@ -22,9 +22,10 @@ class S3DiskConfigValidator extends AbstractValidator
         'region' => ['required', 'string'],
         'bucket' => ['required', 'string'],
         'url'    => ['url'],
-        //'endpoint' => ['url'],
+        'endpoint' => ['url'],
         'use_path_style_endpoint' => ['required', 'bool'],
-        //'options.ACL' => ['string'],
+        'options.ACL' => ['string'],
+        'options.CacheControl' => ['string'],
         'set_by_environment' => ['required', 'bool'],
     ];
 }
