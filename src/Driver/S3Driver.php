@@ -49,13 +49,13 @@ class S3Driver implements DriverInterface
         $root = Arr::get($localConfig, 'root');
         $root = str_replace($this->paths->public, '', $root);
 
-        $driver =  $this->manager->createS3Driver(array_merge(
+        $driver = $this->manager->createS3Driver(array_merge(
             $this->config->config(),
             ['root' => $root]
         ));
 
         $end = microtime(true);
-        resolve('log')->info("S3 driver built in " . round($end - $start, 2) . "s");
+        resolve('log')->info('S3 driver built in '.round($end - $start, 2).'s');
 
         return $driver;
     }

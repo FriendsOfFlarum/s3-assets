@@ -25,7 +25,7 @@ class CopyAssetsCommand extends Command
 {
     protected $signature = 'fof:s3:copy 
         {--move : Delete local files after moving to the S3 disk}';
-        
+
     protected $description = 'Copy assets to the S3 disk';
 
     public function handle(Container $container, Factory $factory, Paths $paths, AssetsPublishCommand $publishCommand)
@@ -38,7 +38,7 @@ class CopyAssetsCommand extends Command
 
         // Move assets
         $this->info($deleteAfterMove ? 'Moving assets...' : 'Copying assets...');
-        $this->moveFilesToDisk($localFilesystem, $paths->public . '/assets', $factory->disk('flarum-assets'), $deleteAfterMove);
+        $this->moveFilesToDisk($localFilesystem, $paths->public.'/assets', $factory->disk('flarum-assets'), $deleteAfterMove);
 
         $publishCommand->run(
             new ArrayInput([]),
