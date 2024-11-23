@@ -47,9 +47,11 @@ class S3Driver implements DriverInterface
         $root = Arr::get($localConfig, 'root');
         $root = str_replace($this->paths->public, '', $root);
 
-        return $this->manager->createS3Driver(array_merge(
+        $driver = $this->manager->createS3Driver(array_merge(
             $this->config->config(),
             ['root' => $root]
         ));
+
+        return $driver;
     }
 }

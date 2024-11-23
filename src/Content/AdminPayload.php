@@ -30,7 +30,6 @@ class AdminPayload
     public function __invoke(Document $document)
     {
         $document->payload['s3SetByEnv'] = $this->s3Config->shouldUseEnv();
-        $document->payload['FoFS3Regions'] = $this->s3->getAwsRegions();
         $document->payload['FoFS3ShareWithFoFUpload'] = $this->settings->get('fof-s3-assets.share_s3_config_with_fof_upload');
     }
 }

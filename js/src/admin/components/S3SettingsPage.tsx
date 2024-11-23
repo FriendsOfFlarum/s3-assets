@@ -1,6 +1,7 @@
 import app from 'flarum/admin/app';
 import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 import ItemList from 'flarum/common/utils/ItemList';
+import Placeholder from 'flarum/common/components/Placeholder';
 import type Mithril from 'mithril';
 
 type AwsRegion = {
@@ -86,6 +87,11 @@ export default class S3SettingsPage extends ExtensionPage {
         })
       );
 
+    // If there are no items, add a placeholder.
+    if (items.toArray().length === 0 && this.s3SetByEnv) {
+      items.add('setByEnv', <Placeholder text={app.translator.trans('fof-s3-assets.admin.settings.general.configured_by_environment')} />);
+    }
+
     return items;
   }
 
@@ -96,7 +102,7 @@ export default class S3SettingsPage extends ExtensionPage {
       'awsS3Key',
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Key`,
-        type: 'password',
+        type: 'string',
         label: app.translator.trans('fof-s3-assets.admin.settings.s3key.label'),
         help: app.translator.trans('fof-s3-assets.admin.settings.s3key.help'),
       })
@@ -106,7 +112,7 @@ export default class S3SettingsPage extends ExtensionPage {
       'awsS3Secret',
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Secret`,
-        type: 'password',
+        type: 'string',
         label: app.translator.trans('fof-s3-assets.admin.settings.s3secret.label'),
         help: app.translator.trans('fof-s3-assets.admin.settings.s3secret.help'),
       })
@@ -116,14 +122,7 @@ export default class S3SettingsPage extends ExtensionPage {
       'awsS3Region',
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Region`,
-        type: 'select',
-        options: this.awsRegions.reduce(
-          (options, region) => {
-            options[region.value] = `${region.label} (${region.value})`;
-            return options;
-          },
-          {} as Record<string, string>
-        ),
+        type: 'string',
         label: app.translator.trans('fof-s3-assets.admin.settings.s3region.label'),
         help: app.translator.trans('fof-s3-assets.admin.settings.s3region.help'),
       })
@@ -146,6 +145,17 @@ export default class S3SettingsPage extends ExtensionPage {
         type: 'string',
         label: app.translator.trans('fof-s3-assets.admin.settings.s3acl.label'),
         help: app.translator.trans('fof-s3-assets.admin.settings.s3acl.help'),
+      })
+    );
+
+    items.add(
+      'awsS3CacheControl',
+      this.buildSettingComponent({
+        setting: `${this.settingPrefix}awsS3CacheControl`,
+        type: 'number',
+        min: 0,
+        label: app.translator.trans('fof-s3-assets.admin.settings.aws-s3.cache-control.label'),
+        help: app.translator.trans('fof-s3-assets.admin.settings.aws-s3.cache-control.help'),
       })
     );
 
