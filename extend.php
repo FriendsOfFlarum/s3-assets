@@ -28,7 +28,7 @@ return [
         ->register(Provider\S3DiskProvider::class),
 
     (new Extend\Console())
-        ->command(Console\MoveAssetsCommand::class),
+        ->command(Console\CopyAssetsCommand::class),
 
     (new Extend\Filesystem())
         ->driver('s3', Driver\S3Driver::class)

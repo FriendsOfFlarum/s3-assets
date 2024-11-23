@@ -24,7 +24,7 @@ The S3 (or compatible) bucket can be configured either by environment variables 
 #### Environment variables
 - `FOF_S3_ACCESS_KEY_ID` - your access key ID *
 - `FOF_S3_SECRET_ACCESS_KEY` - your secret *
-- `FOF_S3_DEFAULT_REGION` - the region *
+- `FOF_S3_REGION` - the region *
 - `FOF_S3_BUCKET` - the bucket name *
 - `FOF_S3_URL` - the public facing base URL of the bucket
 - `FOF_S3_ENDPOINT` - the ARN
@@ -39,12 +39,68 @@ If you plan to setup the S3 configuration using the environment variables, pleas
 
 After your new bucket is configured, any exisiting files, will not exist there (ie uploaded avatars, profile covers, etc).
 
-Use the provided command to start moving these files:
+Use the provided command to start copying these files. An optional additional paramater `--move` will delete the files from your local filesystem after a successful copy.
 
 ```php
-php flarum fof:s3:move
+php flarum fof:s3:copy --move
 ```
 
 ## Links
 
 - [Discuss](https://discuss.flarum.org/d/PUT_DISCUSS_SLUG_HERE)
+
+
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "POST",
+            "GET",
+            "PUT"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": [],
+        "MaxAgeSeconds": 0
+    }
+]
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::nothing-forum-test/*"
+        }
+    ]
+}
+
+
+{
+    "Version": "2012-10-17",
+    "Id": "http referer policy",
+    "Statement": [
+        {
+            "Sid": "Allow get requests originating from www.nothing.community and nothing.community.",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": "arn:aws:s3:::nothing-forum-test/*",
+            "Condition": {
+                "StringLike": {
+                    "aws:Referer": "https://fstlnforum.bbxlk.cc*"
+                }
+            }
+        }
+    ]
+
+}

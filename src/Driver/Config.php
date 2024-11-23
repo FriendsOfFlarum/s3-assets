@@ -52,7 +52,7 @@ class Config
         return $config;
     }
 
-    protected function buildConfigArray(string $key, string $secret, string $region, string $bucket, string $cdnUrl, ?string $endpoint, ?bool $pathStyle, ?string $acl, bool $setByEnv = false, string $driver = 's3'): array
+    protected function buildConfigArray(string $key, string $secret, string $region, string $bucket, string $cdnUrl, ?string $endpoint, ?bool $pathStyle, ?string $acl, bool $setByEnv = false, string $cache = 'max-age=31536000', string $driver = 's3'): array
     {
         // These are the required values for AWS S3.
         // Some S3-compatible services may require additional values, so we check if any of these are set below.
@@ -64,6 +64,7 @@ class Config
             'bucket'                  => $bucket,
             'url'                     => $cdnUrl,
             'set_by_environment'      => $setByEnv,
+            'options'                 => [],
         ];
 
         // These values are generally only required for S3-compatible services.
@@ -77,9 +78,11 @@ class Config
         }
 
         if ($acl) {
-            $config['options'] = [
-                'ACL' => $acl,
-            ];
+            $config['options']['ACL'] = $acl;
+        }
+
+        if ($cache) {
+            $config['options']['CacheControl'] = $cache;
         }
 
         return $config;

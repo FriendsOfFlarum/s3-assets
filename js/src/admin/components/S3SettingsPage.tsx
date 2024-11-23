@@ -96,7 +96,7 @@ export default class S3SettingsPage extends ExtensionPage {
       'awsS3Key',
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Key`,
-        type: 'password',
+        type: 'string',
         label: app.translator.trans('fof-s3-assets.admin.settings.s3key.label'),
         help: app.translator.trans('fof-s3-assets.admin.settings.s3key.help'),
       })
@@ -106,7 +106,7 @@ export default class S3SettingsPage extends ExtensionPage {
       'awsS3Secret',
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Secret`,
-        type: 'password',
+        type: 'string',
         label: app.translator.trans('fof-s3-assets.admin.settings.s3secret.label'),
         help: app.translator.trans('fof-s3-assets.admin.settings.s3secret.help'),
       })
@@ -116,14 +116,7 @@ export default class S3SettingsPage extends ExtensionPage {
       'awsS3Region',
       this.buildSettingComponent({
         setting: `${this.settingPrefix}awsS3Region`,
-        type: 'select',
-        options: this.awsRegions.reduce(
-          (options, region) => {
-            options[region.value] = `${region.label} (${region.value})`;
-            return options;
-          },
-          {} as Record<string, string>
-        ),
+        type: 'string',
         label: app.translator.trans('fof-s3-assets.admin.settings.s3region.label'),
         help: app.translator.trans('fof-s3-assets.admin.settings.s3region.help'),
       })
