@@ -44,8 +44,6 @@ class S3Driver implements DriverInterface
             return $this->manager->createLocalDriver($localConfig);
         }
 
-        $start = microtime(true);
-
         $root = Arr::get($localConfig, 'root');
         $root = str_replace($this->paths->public, '', $root);
 
@@ -53,9 +51,6 @@ class S3Driver implements DriverInterface
             $this->config->config(),
             ['root' => $root]
         ));
-
-        $end = microtime(true);
-        resolve('log')->info('S3 driver built in '.round($end - $start, 2).'s');
 
         return $driver;
     }
