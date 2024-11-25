@@ -31,8 +31,8 @@ return [
 
     (new Extend\Event())
         ->listen(SettingsSaving::class, Listener\SettingsChanged::class),
-        
-    (new S3Lifecycle()),
+
+    new S3Lifecycle(),
 
     (new Extend\Conditional())
         ->when(resolve(ConditionalCheck::class)->validConfig(), fn () => [
