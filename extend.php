@@ -17,11 +17,11 @@ use Flarum\Settings\Event\Saving as SettingsSaving;
 
 return [
     (new Extend\Frontend('admin'))
-        ->js(__DIR__ . '/js/dist/admin.js')
-        ->css(__DIR__ . '/less/admin.less')
+        ->js(__DIR__.'/js/dist/admin.js')
+        ->css(__DIR__.'/less/admin.less')
         ->content(Content\AdminPayload::class),
 
-    new Extend\Locales(__DIR__ . '/locale'),
+    new Extend\Locales(__DIR__.'/locale'),
 
     (new Extend\Settings())
         ->default('fof-s3-assets.share_s3_config_with_fof_upload', false),
@@ -30,12 +30,10 @@ return [
         ->register(Provider\S3DiskProvider::class),
 
     (new Extend\Event())
-        ->listen(SettingsSaving::class, Listener\SettingsChanged::class)
-
-    (new S3Lifecycle()),
+        ->listen(SettingsSaving::class, Listener\SettingsChanged::class)(new S3Lifecycle()),
 
     (new Extend\Conditional())
-        ->when((resolve(ConditionalCheck::class))->validConfig(), fn() => [
+        ->when(resolve(ConditionalCheck::class)->validConfig(), fn () => [
             (new Extend\Console())
                 ->command(Console\CopyAssetsCommand::class),
 
@@ -44,6 +42,6 @@ return [
                 ->driver('local', Driver\S3Driver::class),
 
             (new Extend\Event())
-                ->listen(ClearingCache::class, Listener\RepublishAssets::class)
-        ])
+                ->listen(ClearingCache::class, Listener\RepublishAssets::class),
+        ]),
 ];

@@ -26,7 +26,6 @@ class S3Repository
         protected DriverConfig $config,
         protected CacheClearCommand $cache,
         protected AssetsPublishCommand $publish,
-        
     ) {
     }
 
@@ -36,7 +35,7 @@ class S3Repository
     }
 
     /**
-     * Just a helper method to call the Flarum clear cache command
+     * Just a helper method to call the Flarum clear cache command.
      *
      * @return void
      */
@@ -49,7 +48,7 @@ class S3Repository
     }
 
     /**
-     * Just a helper method to call the Flarum publish assets command
+     * Just a helper method to call the Flarum publish assets command.
      *
      * @return void
      */

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/s3-assets.
+ *
+ * Copyright (c) FriendsOfFlarum
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\S3Assets;
 
 use Exception;
@@ -10,15 +19,16 @@ use Illuminate\Contracts\Cache\Store;
 class ConditionalCheck
 {
     const CACHE_KEY = 'fof-s3-assets-config-valid';
-    
+
     public function __construct(
         protected DriverConfig $config,
         protected S3DiskConfigValidator $validator,
         protected Store $cache
-    ) {}
+    ) {
+    }
 
     /**
-     * Checks to see if the supplied config passes the required checks
+     * Checks to see if the supplied config passes the required checks.
      */
     public function validConfig(): bool
     {
@@ -26,7 +36,7 @@ class ConditionalCheck
         if (($cacheValue = $this->cache->get(self::CACHE_KEY)) && $cacheValue !== null) {
             return $cacheValue;
         }
-        
+
         // If we don't have a cached value, check the config
         $config = $this->config->config();
 
@@ -39,6 +49,7 @@ class ConditionalCheck
             $this->cache->forever(self::CACHE_KEY, true);
         } catch (Exception $e) {
             $this->cache->forever(self::CACHE_KEY, false);
+
             return false;
         }
 
