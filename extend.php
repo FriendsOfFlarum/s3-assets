@@ -30,7 +30,9 @@ return [
         ->register(Provider\S3DiskProvider::class),
 
     (new Extend\Event())
-        ->listen(SettingsSaving::class, Listener\SettingsChanged::class)(new S3Lifecycle()),
+        ->listen(SettingsSaving::class, Listener\SettingsChanged::class),
+        
+    (new S3Lifecycle()),
 
     (new Extend\Conditional())
         ->when(resolve(ConditionalCheck::class)->validConfig(), fn () => [
