@@ -2,7 +2,9 @@ import app from 'flarum/admin/app';
 import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 import ItemList from 'flarum/common/utils/ItemList';
 import Placeholder from 'flarum/common/components/Placeholder';
-import type Mithril from 'mithril';
+import Tooltip from 'flarum/common/components/Tooltip';
+import humanTime from 'flarum/common/utils/humanTime';
+import Mithril from 'mithril';
 
 type AwsRegion = {
   value: string;
@@ -68,6 +70,15 @@ export default class S3SettingsPage extends ExtensionPage {
           {this.s3CompatibleItems().toArray()}
         </div>
       );
+
+    items.add(
+      'revManifest',
+      <div className="Section">
+        <h3>{app.translator.trans('fof-s3-assets.admin.settings.revision-manifest.heading')}</h3>
+        <p className="helpText">{app.translator.trans('fof-s3-assets.admin.settings.revision-manifest.help')}</p>
+        {this.revManifestItems().toArray()}
+      </div>
+    );
 
     return items;
   }
@@ -193,6 +204,43 @@ export default class S3SettingsPage extends ExtensionPage {
         label: app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.path-style-endpoint.label'),
         help: app.translator.trans('fof-s3-assets.admin.settings.s3-compatible.path-style-endpoint.help'),
       })
+    );
+
+    return items;
+  }
+
+  revManifestItems(): ItemList<Mithril.Children> {
+    const items = new ItemList<Mithril.Children>();
+
+    const revManifest = this.setting('s3assets.revision');
+    const timestamp = this.setting('s3assets.revision_last_updated');
+
+    // Parse JSON string into an object before pretty printing
+    let parsedManifest;
+    try {
+      parsedManifest = JSON.parse(revManifest());
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+      parsedManifest = { error: 'Invalid JSON format' };
+    }
+    const timestampText = timestamp();
+    items.add(
+      'revManifest-timestamp',
+      <div>
+        {app.translator.trans('fof-s3-assets.admin.settings.revision-manifest.timestamp')}
+        <p className="helpText">
+          <Tooltip text={timestampText}>
+            <span>{humanTime(timestamp())}</span>
+          </Tooltip>
+        </p>
+      </div>
+    );
+
+    items.add(
+      'revManifest-data',
+      <div>
+        <pre>{JSON.stringify(parsedManifest, null, 2)}</pre>
+      </div>
     );
 
     return items;
