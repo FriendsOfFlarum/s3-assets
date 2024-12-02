@@ -11,6 +11,7 @@
 
 namespace FoF\S3Assets\Frontend;
 
+use Carbon\Carbon;
 use Flarum\Frontend\Compiler\VersionerInterface;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Support\Arr;
@@ -18,6 +19,7 @@ use Illuminate\Support\Arr;
 class Versioner implements VersionerInterface
 {
     const REVISION_KEY = 's3assets.revision';
+    const TIMESTAMP_KEY = 's3assets.revision_last_updated';
 
     public function __construct(
         protected SettingsRepositoryInterface $settings
@@ -35,6 +37,7 @@ class Versioner implements VersionerInterface
         }
 
         $this->settings->set(self::REVISION_KEY, json_encode($manifest));
+        $this->settings->set(self::TIMESTAMP_KEY, Carbon::now());
     }
 
     public function getRevision(string $file): ?string

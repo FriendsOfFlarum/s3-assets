@@ -29,7 +29,7 @@ class S3Repository
     ) {
     }
 
-    public function cdnHost(): string
+    public function cdnHost(): ?string
     {
         return Arr::get($this->config->config(), 'url');
     }

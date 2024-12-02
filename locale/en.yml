@@ -8,6 +8,12 @@ fof-s3-assets:
         shareWithFoFUpload:
           label: Use FoF Upload S3 settings.
           help: Re-use the S3 settings from the FoF Upload extension.
+
+      revision-manifest:
+        heading: Revision Manifest
+        help: Displays the revision manifest status.
+        timestamp: Last updated
+
       s3:
         cache-control:
           label: Cache-Control
